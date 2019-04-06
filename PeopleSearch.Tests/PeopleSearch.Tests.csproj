@@ -13,4 +13,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PeopleSearch.Data\PeopleSearch.Data.csproj" />
+  </ItemGroup>
 </Project>
