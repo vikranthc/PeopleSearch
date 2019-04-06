@@ -24,7 +24,7 @@ namespace PeopleSearch.Data.Domain
             byte[] avatar = null)
         {
             if (String.IsNullOrWhiteSpace(firstName))
-                throw new ArgumentException("First Name is required", nameof(firstName));
+                throw new ArgumentException("First Name is requsired", nameof(firstName));
 
             if (String.IsNullOrWhiteSpace(lastName))
                 throw new ArgumentException("Last Name is required", nameof(lastName));

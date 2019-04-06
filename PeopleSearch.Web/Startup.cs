@@ -1,9 +1,13 @@
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PeopleSearch.Data;
 
 namespace PeopleSearch.Web
 {
@@ -20,6 +24,9 @@ namespace PeopleSearch.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            var connection = @"Data Source=(LocalDB)\MSSQLLocalDB;Database=HealthCatalystDB;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<PeopleSearchContext>(options => options.UseSqlServer(connection));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

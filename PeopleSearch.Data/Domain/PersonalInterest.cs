@@ -4,7 +4,9 @@ namespace PeopleSearch.Data.Domain
 {
     public class PersonalInterest
     {
-        public string Interest { get; set; }
+        public long PersonalInterestId { get; private set; }
+
+        public string Interest { get; private set; }
 
         public PersonalInterest(string interest)
         {

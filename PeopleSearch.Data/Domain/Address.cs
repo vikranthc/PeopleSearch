@@ -1,5 +1,8 @@
-﻿namespace PeopleSearch.Data.Domain
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace PeopleSearch.Data.Domain
 {
+    [Owned]
     public sealed class Address
     {
         public string Street { get; set; }
