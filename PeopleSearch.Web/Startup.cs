@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PeopleSearch.Data;
+using PeopleSearch.Data.Service;
 
 namespace PeopleSearch.Web
 {
@@ -27,7 +28,7 @@ namespace PeopleSearch.Web
 
             var connection = @"Data Source=(LocalDB)\MSSQLLocalDB;Database=HealthCatalystDB;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<PeopleSearchContext>(options => options.UseSqlServer(connection));
-
+            services.AddTransient<IPersonRepository, PersonRepository>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
