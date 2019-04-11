@@ -3,17 +3,25 @@
   <button class="btn btn-primary" (click)="openAddPerson()">Add Person</button>
 </div>
 <hr />
-<div class="row">
-    <input type="text" class="form-control" placeholder="Search by name" (keyup)="searchText$.next($event.target.value)" />
+<div class="form-group col-lg-6">
+  <input type="text" class="form-control" placeholder="Search by name" (keyup)="searchText$.next($event.target.value)" />
 
 </div>
 
 <div class="spinner-border text-primary" role="status" *ngIf="isLoading">
-    <span class="sr-only">Loading...</span>
+  <span class="sr-only">Loading...</span>
 </div>
 
-<div class="row" [hidden]="isLoading" >
-    <div *ngFor="let person of (searchResult$ | async)">
-        <person-display-card [person]="person"></person-display-card>
+<div class="row" *ngIf="searchResult$ | async as results">
+    <ng-container *ngIf="results.length then resultsFound; else noResults">
+    </ng-container>
+    <div *ngIf="!isLoading" class="row row-eq-height">
+        <div class="form-group col-lg-3" *ngFor="let person of results" #resultsFound >
+            <person-display-card [person]="person"></person-display-card>
+        </div>
     </div>
+
+    <ng-template #noResults>
+        <span>No results found</span>
+    </ng-template>
 </div>

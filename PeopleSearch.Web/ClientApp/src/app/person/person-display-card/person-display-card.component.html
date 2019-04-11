@@ -1,12 +1,18 @@
-<div class="card" style="width: 18rem">
-    <img class="card-img-top" src="data:image/png;base64,{{person.avatarString}}"/>
-    <div class="card-body">
-      <h5 class="card-title">{{person.firstName}} {{person.lastName}}</h5>
-        <p class="card-text">Age: {{person.age}}</p>
-        <p class="card-text">
-            <span class="badge badge-pill badge-secondary" *ngFor="let i of person.personalInterests">{{i.interest}}</span>
-        </p>
-        <p class="card-text">Address: {{person.address.city}}</p>
-
+<div class="card">
+  <img class="card-img-top" src="data:image/png;base64,{{person.avatarString}}" />
+  <div class="card-body">
+    <h5 class="card-title">{{person.firstName}} {{person.lastName}}</h5>
+    <div class="card-text"><strong>Age:</strong> {{person.age}}</div>
+    <div class="card-text">
+      <strong>Interests:</strong><span class="badge badge-pill badge-secondary" *ngFor="let i of person.personalInterests">{{i.interest}}</span>
     </div>
+    <div class="card-text">
+      <strong>Address:</strong>
+      {{person.address.street}},<br />
+      {{person.address.city}},
+      {{person.address.state}},
+      {{person.address.zip}}
+    </div>
+
+  </div>
 </div>
