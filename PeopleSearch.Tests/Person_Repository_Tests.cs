@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.InMemory;
 using PeopleSearch.Data;
 using PeopleSearch.Data.Domain;
 using PeopleSearch.Data.Service;
@@ -24,7 +23,7 @@ namespace PeopleSearch.Tests
                 a.Persons.Add(new Person("Vikranth", "Reddy"));
                 a.SaveChanges();
                 var repo = new PersonRepository(a);
-                Assert.Equal(2, repo.GetPersons(0,100).Count());
+                Assert.Equal(2, repo.GetPersons(0,100).Result.Count());
             }
         }
 
@@ -41,10 +40,11 @@ namespace PeopleSearch.Tests
                 a.SaveChanges();
 
                 var repo = new PersonRepository(a);
-                Assert.Single(repo.Search("reddy"));
-                Assert.Equal(2, repo.Search("ranth").Count());
-                Assert.Empty(repo.Search("Dhatri"));
-                Assert.Empty(repo.Search("Nelle"));
+
+                Assert.Single(repo.Search("reddy").Result);
+                Assert.Equal(2, repo.Search("ranth").Result.Count());
+                Assert.Empty(repo.Search("Dhatri").Result);
+                Assert.Empty(repo.Search("Nelle").Result);
             }
         }
     }

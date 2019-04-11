@@ -46,11 +46,20 @@ namespace PeopleSearch.Tests
             Assert.Equal(person1.DateOfBirth, person2.DateOfBirth);
         }
 
+        public void Person_Search_Should_Match_FirstName_Or_LastName()
+        {
+            var person1 = new Person("Vikranth", "Ceakala", new DateTime(1988, 11, 2));
+            var isMatch = person1.IsMatch("Vik");
+
+            Assert.True(isMatch);
+            Assert.False(person1.IsMatch("zz"));
+        }
+
 
         [Fact]
         public void PersonalInterest_Without_Interest_Should_Fail()
         {
-            var ex  = Record.Exception(()=>new PersonalInterest(""));
+            var ex = Record.Exception(() => new PersonalInterest(""));
 
             Assert.NotNull(ex);
             Assert.IsType<ArgumentException>(ex);
@@ -60,7 +69,7 @@ namespace PeopleSearch.Tests
         public void PersonalInterest_With_Interest_Should_Instantiate()
         {
             var ex = Record.Exception(() => new PersonalInterest("    Writing"));
-            
+
             Assert.Null(ex);
         }
 

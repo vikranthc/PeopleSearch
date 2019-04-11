@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PeopleSearch.Data.Domain
 {
@@ -12,6 +13,20 @@ namespace PeopleSearch.Data.Domain
         public Address Address { get; private set; }
         public IEnumerable<PersonalInterest> PersonalInterests { get; private set; } = new List<PersonalInterest>();
         public byte[] Avatar { get; private set; }
+
+        [NotMapped]
+        public string AvatarString => Convert.ToBase64String(Avatar);
+
+        [NotMapped]
+        public string Age
+        {
+            get
+            {
+                if (DateOfBirth.HasValue)
+                    return ((DateTime.Now - DateOfBirth.Value).Days / 365).ToString();
+                else return null;
+            }
+        }
 
         private Person() {/* For use by Entity Framework */ }
 
@@ -50,6 +65,14 @@ namespace PeopleSearch.Data.Domain
             this.LastName = person.LastName;
 
             return this;
+        }
+
+        public bool IsMatch(string text)
+        {
+            return
+                this.FirstName.Contains(text, StringComparison.InvariantCultureIgnoreCase)
+                || this.LastName.Contains(text, StringComparison.InvariantCultureIgnoreCase);
+
         }
     }
 }

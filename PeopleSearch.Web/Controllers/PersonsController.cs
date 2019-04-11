@@ -19,10 +19,18 @@ namespace PeopleSearch.Web.Controllers
         {
             this.personRepository = personRepository;
         }
-
-        public IEnumerable<Person> Index()
+        
+        public async Task<IEnumerable<Person>> Index(string searchText = null)
         {
-            return personRepository.GetPersons(0, 100);
+            await Task.Delay(2500);
+            if(String.IsNullOrWhiteSpace(searchText))
+            {
+                return await personRepository.GetPersons(skip:0, take:100);
+            }
+            else
+            {
+                return await personRepository.Search(searchText);
+            }
         }
     }
 }

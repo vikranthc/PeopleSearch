@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PeopleSearch.Data.Domain;
 
 namespace PeopleSearch.Data.Service
 {
     public interface IPersonRepository
     {
-        IEnumerable<Person> GetPersons(int skip, int take);
-        IEnumerable<Person> Search(string v);
+        Task<IEnumerable<Person>> GetPersons(int skip, int take);
+        Task<IEnumerable<Person>> Search(string v);
     }
 
     public class PersonRepository : IPersonRepository
@@ -21,22 +23,21 @@ namespace PeopleSearch.Data.Service
             _db = ctx;
         }
 
-        public IEnumerable<Person> GetPersons(int skip, int take)
+        public async Task<IEnumerable<Person>> GetPersons(int skip, int take)
         {
-            return _db.Persons.Skip(skip).Take(take).ToList();
+            return await _db.Persons
+                .Include(c => c.PersonalInterests)
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
         }
 
-        public IEnumerable<Person> Search(string v)
+        public async Task<IEnumerable<Person>> Search(string v)
         {
-            return _db.Persons.Where(c => IsMatch(c, v));
-        }
-
-        private bool IsMatch(Person person, string text)
-        {
-            return
-                person.FirstName.Contains(text, StringComparison.InvariantCultureIgnoreCase)
-                || person.LastName.Contains(text, StringComparison.InvariantCultureIgnoreCase);
-
+            return await _db.Persons
+                .Include(c => c.PersonalInterests)
+                .Where(c => c.IsMatch(v))
+                .ToListAsync();
         }
     }
 }
