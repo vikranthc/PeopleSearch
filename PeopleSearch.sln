@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.539
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleSearch.Web", "PeopleSearch.Web\PeopleSearch.Web.csproj", "{7184E883-C3B7-4FA1-B5B3-322EF25D5895}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleSearch.Web", "PeopleSearch.Web\PeopleSearch.Web.csproj", "{7184E883-C3B7-4FA1-B5B3-322EF25D5895}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleSearch.Data", "PeopleSearch.Data\PeopleSearch.Data.csproj", "{27B7AD2C-D17B-4251-9014-5456A06F10A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleSearch.Data", "PeopleSearch.Data\PeopleSearch.Data.csproj", "{27B7AD2C-D17B-4251-9014-5456A06F10A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleSearch.Tests", "PeopleSearch.Tests\PeopleSearch.Tests.csproj", "{633C217F-52D9-4E3C-BDEA-62FE4D381EA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleSearch.Tests", "PeopleSearch.Tests\PeopleSearch.Tests.csproj", "{633C217F-52D9-4E3C-BDEA-62FE4D381EA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

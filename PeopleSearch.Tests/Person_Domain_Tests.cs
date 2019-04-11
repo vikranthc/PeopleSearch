@@ -53,6 +53,7 @@ namespace PeopleSearch.Tests
 
             Assert.True(isMatch);
             Assert.False(person1.IsMatch("zz"));
+            Assert.False(person1.IsMatch(null));
         }
 
 

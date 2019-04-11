@@ -15,9 +15,6 @@ namespace PeopleSearch.Data.Domain
         public byte[] Avatar { get; private set; }
 
         [NotMapped]
-        public string AvatarString => Convert.ToBase64String(Avatar);
-
-        [NotMapped]
         public string Age
         {
             get

@@ -11,7 +11,7 @@ namespace PeopleSearch.Data.Service
     public interface IPersonRepository
     {
         Task<IEnumerable<Person>> GetPersons(int skip, int take);
-        Task<IEnumerable<Person>> Search(string v);
+        Task<IEnumerable<Person>> Search(string searchText);
     }
 
     public class PersonRepository : IPersonRepository
@@ -27,16 +27,18 @@ namespace PeopleSearch.Data.Service
         {
             return await _db.Persons
                 .Include(c => c.PersonalInterests)
+                .OrderBy(c => c.PersonId)
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Person>> Search(string v)
+        public async Task<IEnumerable<Person>> Search(string searchText)
         {
             return await _db.Persons
                 .Include(c => c.PersonalInterests)
-                .Where(c => c.IsMatch(v))
+                .Where(c => c.IsMatch(searchText))
+                .OrderBy(c => c.PersonId)
                 .ToListAsync();
         }
     }

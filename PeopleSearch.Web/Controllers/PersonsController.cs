@@ -22,13 +22,13 @@ namespace PeopleSearch.Web.Controllers
         
         public async Task<IEnumerable<Person>> Index(string searchText = null)
         {
-            await Task.Delay(2500);
-            if(String.IsNullOrWhiteSpace(searchText))
+            if (searchText == null)
             {
-                return await personRepository.GetPersons(skip:0, take:100);
+                return await personRepository.GetPersons(skip: 0, take: 100);
             }
             else
             {
+                await Task.Delay(2500);
                 return await personRepository.Search(searchText);
             }
         }

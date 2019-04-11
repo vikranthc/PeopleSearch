@@ -9,23 +9,12 @@ import { distinctUntilChanged, switchMap, debounceTime } from 'rxjs/operators';
 export class PersonService {
   constructor(private http: HttpClient) { }
 
-  //isLoading: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-  searchPersons$(text$): Observable<any> {
-    return text$.pipe(
-      debounceTime(1000),
-      distinctUntilChanged(),
-      switchMap(c => this.searchPersons(c)));
-
-  }
-
   searchPersons(text) {
-    //this.isLoading.next(true);
     var url = `/api/persons?searchText=${text}`;
     return this.http.get(url);
   }
 
-  getPersons(): Observable<any> {
+  getAllPersons(): Observable<any> {
     var url = "/api/persons";
     return this.http.get(url);
   }
